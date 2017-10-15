@@ -1,0 +1,80 @@
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Friday the 13th Calculater</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous">
+    <script
+      src="https://code.jquery.com/jquery-2.2.4.min.js"
+      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+      crossorigin="anonymous">
+    </script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+      integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+      crossorigin="anonymous">
+    </script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+	
+	<script>//I over-rode some of the default CSS to make the date and time appear blue</script>
+	<link href='Rome/dist/rome.css' rel='stylesheet' type='text/css' />
+	<script src='Rome/dist/rome.js'></script>
+
+</head>
+
+<body>
+	<div class='container'>
+		<br>
+		<div class='form-group'>
+			Find all Friday the 13ths between
+			<input id='date1'>
+			and
+			<input id='date2'>
+		</div>
+		<button id='enter' class="btn btn-primary form-control">Enter</button>
+		<div id='results'>
+		</div>
+	</div>
+
+	<script>
+		rome(date1,{time:false, min: '1970-01-01', max: '2100-01-01'});
+		rome(date2,{time:false, min: '1970-01-01', max: '2100-01-01'});
+		
+		$("#enter").click(function(){
+			if($("#date1").val() == '' || $("#date2").val() == ''){
+				console.log('blank');
+			}
+			else{
+				var firstDate = new Date($("#date1").val());
+				var lastDate = new Date($("#date2").val());
+				var count=0;
+				var dateResults = "";
+				
+				while (firstDate <= lastDate)
+				{
+				   if (firstDate.getDate() == 13 && firstDate.getDay() == 5)
+				   {
+						count++;
+						month = firstDate.getMonth() + 1;
+						//console.log(month.toString(), "/", firstDate.getFullYear().toString());
+						dateResults = dateResults + "<br>" + month.toString() + "/" + firstDate.getFullYear().toString();
+				   }
+				   
+				   firstDate.setDate(firstDate.getDate() + 1);
+				}
+				
+				//console.log("Answer: ", count);
+				//console.log(dateResults);
+				
+				$("#results").html("<br>Number of Friday the 13ths: " + count + "<br>" + dateResults);
+			}
+		});
+	</script>
+	
+</body>
+</html>
