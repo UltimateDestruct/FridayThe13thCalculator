@@ -1,0 +1,2 @@
+1. Investigate using datePicker instead of Rome for the date selection field. Rome is light and the UI is great, but it doesn't do a whole lot for displaying dates on-screen.
+2. Clean up the result information; maybe put it in a table or something?
